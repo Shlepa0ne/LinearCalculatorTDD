@@ -69,3 +69,12 @@ def test_jacobi_3x3():
     expected = [1, 1, 1]
     result = solver.solve_jacobi(A, b, tol=1e-6, max_iter=1000)
     assert result == pytest.approx(expected)
+
+def test_seidel_simple_2x2():
+    solver = Solver()
+    A = [[10, 1],
+         [1, 10]]
+    b = [11, 21]
+    expected = [89/99, 199/99]
+    result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
+    assert result == pytest.approx(expected, rel=1e-5)
