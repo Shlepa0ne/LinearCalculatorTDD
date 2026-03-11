@@ -87,3 +87,13 @@ def test_seidel_another_2x2():
     expected = [1, 1]
     result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
     assert result == pytest.approx(expected)
+
+def test_seidel_3x3():
+    solver = Solver()
+    A = [[5, 1, 1],
+         [1, 5, 1],
+         [1, 1, 5]]
+    b = [7, 7, 7]
+    expected = [1, 1, 1]
+    result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
+    assert result == pytest.approx(expected)
