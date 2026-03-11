@@ -53,9 +53,28 @@ class Solver:
                 return x
         raise RuntimeError("Seidel did not converge")
     
+    def _determinant(self, matrix):
+        n = len(matrix)
+        if n == 1:
+            return matrix[0][0]
+        if n == 2:
+            return matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0]
+        det = 0
+        for c in range(n):
+            minor = [row[:c] + row[c+1:] for row in matrix[1:]]
+            det += ((-1) ** c) * matrix[0][c] * self._determinant(minor)
+        return det
+
     def solve_cramer(self, A, b):
-        if A == [[2, 1], [1, 2]] and b == [5, 4]:
-            return [2, 1]
-        if A == [[1, 1], [1, -1]] and b == [3, 1]:
-            return [2, 1]
-        raise NotImplementedError("Only specific cases work")
+        n = len(A)
+        detA = self._determinant(A)
+        if abs(detA) < 1e-12:
+            raise ValueError("Matrix is singular, Cramer's rule cannot be applied")
+        x = []
+        for i in range(n):
+            Ai = [row[:] for row in A]
+            for j in range(n):
+                Ai[j][i] = b[j]
+            detAi = self._determinant(Ai)
+            x.append(detAi / detA)
+        return x
