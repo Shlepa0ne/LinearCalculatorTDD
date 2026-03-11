@@ -130,3 +130,12 @@ def test_cramer_simple_2x2():
     expected = [2, 1]
     result = solver.solve_cramer(A, b)
     assert result == pytest.approx(expected)
+
+def test_cramer_another_2x2():
+    solver = Solver()
+    A = [[1, 1],
+         [1, -1]]
+    b = [3, 1]
+    expected = [2, 1]
+    result = solver.solve_cramer(A, b)
+    assert result == pytest.approx(expected)
