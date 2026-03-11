@@ -27,8 +27,15 @@ class Solver:
         return x
     
     def solve_jacobi(self, A, b, tol=1e-6, max_iter=1000):
-        if A == [[10, 1], [1, 10]] and b == [11, 21]:
-            return [1, 2]
-        if A == [[2, -1], [-1, 2]] and b == [1, 1]:
-            return [1, 1]
-        raise NotImplementedError("Only specific cases work")
+        n = len(A)
+        x = [0.0] * n
+        for _ in range(max_iter):
+            x_new = [0.0] * n
+            for i in range(n):
+                s = sum(A[i][j] * x[j] for j in range(n) if j != i)
+                x_new[i] = (b[i] - s) / A[i][i]
+            # Проверка сходимости
+            if max(abs(x_new[i] - x[i]) for i in range(n)) < tol:
+                return x_new
+            x = x_new
+        raise RuntimeError("Jacobi did not converge")
