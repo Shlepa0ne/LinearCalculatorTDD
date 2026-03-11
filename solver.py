@@ -78,3 +78,14 @@ class Solver:
             detAi = self._determinant(Ai)
             x.append(detAi / detA)
         return x
+    
+    def solve(self, method, A, b, **kwargs):
+        methods = {
+            'gauss': self.solve_gauss,
+            'jacobi': self.solve_jacobi,
+            'seidel': self.solve_seidel,
+            'cramer': self.solve_cramer
+        }
+        if method not in methods:
+            raise ValueError(f"Unknown method: {method}")
+        return methods[method](A, b, **kwargs)
