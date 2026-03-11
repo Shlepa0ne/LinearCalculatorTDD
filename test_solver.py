@@ -41,3 +41,12 @@ def test_gauss_with_zero_pivot():
     expected = [1, 1]
     result = solver.solve_gauss(A, b)
     assert result == pytest.approx(expected)
+
+def test_jacobi_simple_2x2():
+    solver = Solver()
+    A = [[10, 1],
+         [1, 10]]
+    b = [11, 21]
+    expected = [1, 2]
+    result = solver.solve_jacobi(A, b, tol=1e-6, max_iter=1000)
+    assert result == pytest.approx(expected, rel=1e-5)
