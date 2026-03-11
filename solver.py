@@ -41,8 +41,14 @@ class Solver:
         raise RuntimeError("Jacobi did not converge")
 
     def solve_seidel(self, A, b, tol=1e-6, max_iter=1000):
-        if A == [[10, 1], [1, 10]] and b == [11, 21]:
-            return [89/99, 199/99]
-        if A == [[2, -1], [-1, 2]] and b == [1, 1]:
-            return [1, 1]
-        raise NotImplementedError("Seidel method is not implemented yet")
+        n = len(A)
+        x = [0.0] * n
+        for _ in range(max_iter):
+            x_old = x.copy()
+            for i in range(n):
+                s1 = sum(A[i][j] * x[j] for j in range(i)) # уже обновлённые
+                s2 = sum(A[i][j] * x_old[j] for j in range(i+1, n)) # старые
+                x[i] = (b[i] - s1 - s2) / A[i][i]
+            if max(abs(x[i] - x_old[i]) for i in range(n)) < tol:
+                return x
+        raise RuntimeError("Seidel did not converge")
