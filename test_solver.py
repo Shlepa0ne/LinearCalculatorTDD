@@ -78,3 +78,12 @@ def test_seidel_simple_2x2():
     expected = [89/99, 199/99]
     result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
     assert result == pytest.approx(expected, rel=1e-5)
+
+def test_seidel_another_2x2():
+    solver = Solver()
+    A = [[2, -1],
+         [-1, 2]]
+    b = [1, 1]
+    expected = [1, 1]
+    result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
+    assert result == pytest.approx(expected)
