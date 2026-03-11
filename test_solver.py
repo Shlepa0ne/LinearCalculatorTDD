@@ -121,3 +121,12 @@ def test_seidel_1x1():
     expected = [2]
     result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
     assert result == pytest.approx(expected)
+
+def test_cramer_simple_2x2():
+    solver = Solver()
+    A = [[2, 1],
+         [1, 2]]
+    b = [5, 4]
+    expected = [2, 1]
+    result = solver.solve_cramer(A, b)
+    assert result == pytest.approx(expected)
