@@ -29,6 +29,6 @@ def test_gauss_3x3():
          [2, 1, -1],
          [1, -1, 1]]
     b = [6, 3, 2]
-    expected = [1, 2, 3]
+    expected = [5/3, 2, 7/3]
     result = solver.solve_gauss(A, b)
     assert result == pytest.approx(expected)
