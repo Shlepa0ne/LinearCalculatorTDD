@@ -1,15 +1,18 @@
 class Solver:
     def solve_gauss(self, A, b):
         n = len(A)
-        # Прямой ход
+        # Прямой ход с выбором главного элемента
         for i in range(n):
-            # Поиск строки с ненулевым элементом в столбце i
-            if A[i][i] == 0:
-                for k in range(i+1, n):
-                    if A[k][i] != 0:
-                        A[i], A[k] = A[k], A[i]
-                        b[i], b[k] = b[k], b[i]
-                        break
+            # Поиск максимального элемента в столбце i
+            max_row = i
+            for k in range(i+1, n):
+                if abs(A[k][i]) > abs(A[max_row][i]):
+                    max_row = k
+            if A[max_row][i] == 0:
+                raise ValueError("Matrix is singular")
+            if max_row != i:
+                A[i], A[max_row] = A[max_row], A[i]
+                b[i], b[max_row] = b[max_row], b[i]
             # Исключение
             for j in range(i+1, n):
                 factor = A[j][i] / A[i][i]
