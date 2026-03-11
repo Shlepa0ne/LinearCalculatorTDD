@@ -149,3 +149,12 @@ def test_cramer_3x3():
     expected = [1, 1, 1]
     result = solver.solve_cramer(A, b)
     assert result == pytest.approx(expected)
+
+def test_solve_method_dispatch():
+    solver = Solver()
+    A = [[2,1],[1,2]]
+    b = [5,4]
+    assert solver.solve('gauss', A, b) == [2,1]
+    assert solver.solve('cramer', A, b) == [2,1]
+    with pytest.raises(ValueError):
+        solver.solve('unknown', A, b)
