@@ -50,3 +50,12 @@ def test_jacobi_simple_2x2():
     expected = [1, 2]
     result = solver.solve_jacobi(A, b, tol=1e-6, max_iter=1000)
     assert result == pytest.approx(expected, rel=1e-5)
+
+def test_jacobi_another_2x2():
+    solver = Solver()
+    A = [[2, -1],
+         [-1, 2]]
+    b = [1, 1]
+    expected = [1, 1]
+    result = solver.solve_jacobi(A, b, tol=1e-6, max_iter=1000)
+    assert result == pytest.approx(expected)
