@@ -97,3 +97,27 @@ def test_seidel_3x3():
     expected = [1, 1, 1]
     result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
     assert result == pytest.approx(expected)
+
+def test_gauss_1x1():
+    solver = Solver()
+    A = [[5]]
+    b = [10]
+    expected = [2]
+    result = solver.solve_gauss(A, b)
+    assert result == pytest.approx(expected)
+
+def test_jacobi_1x1():
+    solver = Solver()
+    A = [[5]]
+    b = [10]
+    expected = [2]
+    result = solver.solve_jacobi(A, b, tol=1e-6, max_iter=1000)
+    assert result == pytest.approx(expected)
+
+def test_seidel_1x1():
+    solver = Solver()
+    A = [[5]]
+    b = [10]
+    expected = [2]
+    result = solver.solve_seidel(A, b, tol=1e-6, max_iter=1000)
+    assert result == pytest.approx(expected)
