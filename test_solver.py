@@ -13,3 +13,12 @@ def test_gauss_simple_2x2():
     expected = [2, 1]
     result = solver.solve_gauss(A, b)
     assert result == pytest.approx(expected)
+
+def test_gauss_another_2x2():
+    solver = Solver()
+    A = [[1, 1],
+         [1, -1]]
+    b = [3, 1]
+    expected = [2, 1]
+    result = solver.solve_gauss(A, b)
+    assert result == pytest.approx(expected)
